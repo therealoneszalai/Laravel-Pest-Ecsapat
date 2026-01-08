@@ -10,4 +10,4 @@ Artisan::command('inspire', function () {
  
 =======
 })->purpose('Display an inspiring quote');
->>>>>>> SZM_BRANCH
+>>>>>>> SZM_BRANCH 
