@@ -17,7 +17,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-        'title' => $this->faker->sentence(), // Ez generálja a címet!
+        'title' => $this->faker->sentence(),
         'description' => $this->faker->paragraph(),
         'status' => 'pending',
         'user_id' => \App\Models\User::factory(),

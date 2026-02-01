@@ -20,7 +20,7 @@ it('módosítani tudja a saját feladatát', function () {
         ->assertStatus(200)
         ->assertJsonFragment(['title' => 'Frissített cím']);
 
-    // Ellenőrizzük az adatbázisban is
+    // Ellenőrizzük az adatbázisban
     $this->assertDatabaseHas('tasks', [
         'id' => $task->id,
         'title' => 'Frissített cím',
@@ -35,5 +35,5 @@ it('nem tudja módosítani más felhasználó feladatát', function () {
 
     actingAs($userA)
         ->putJson("/api/tasks/{$taskOfUserB->id}", ['title' => 'Hackelt cím'])
-        ->assertStatus(403); // Tiltott hozzáférés!
+        ->assertStatus(403); // Tiltott hozzáférés
 });
