@@ -7,7 +7,6 @@ use function Pest\Laravel\{actingAs, postJson};
 
 uses(RefreshDatabase::class);
 
-// --- SIKERES TESZT ---
 it('menti az új feladatot valid adatok esetén', function () {
     $user = User::factory()->create();
 
@@ -19,10 +18,9 @@ it('menti az új feladatot valid adatok esetén', function () {
 
     actingAs($user)
         ->postJson('/api/tasks', $payload)
-        ->assertStatus(201) // Created
+        ->assertStatus(201)
         ->assertJsonFragment($payload);
 
-    // Ellenőrizzük az adatbázisban is
     $this->assertDatabaseHas('tasks', $payload);
 });
 
@@ -42,7 +40,7 @@ describe('PostTask validációs szabályok', function () {
         $user = User::factory()->create();
 
         actingAs($user)
-            ->postJson('/api/tasks', ['title' => 'Ab']) // Min 3 karakter pl.
+            ->postJson('/api/tasks', ['title' => 'Ab'])
             ->assertStatus(422)
             ->assertJsonValidationErrors(['title']);
     });
