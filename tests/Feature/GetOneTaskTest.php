@@ -6,19 +6,21 @@ use function Pest\Laravel\{actingAs, getJson};
 
 uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
+// user és task create
 it('megjeleníti a saját feladatának részleteit', function () {
     $user = User::factory()->create();
     $task = Task::factory()->create([
         'user_id' => $user->id,
         'title' => 'Fontos Küldetés'
     ]);
-
+// user create
     actingAs($user)
         ->getJson("/api/tasks/{$task->id}")
         ->assertStatus(200)
         ->assertJsonFragment(['title' => 'Fontos Küldetés']);
 });
 
+//2 user create és megkapja a helyes user a taskját a másik pedig nem férhet hozzá
 it('megtagadja a hozzáférést más felhasználó feladatához', function () {
     $userA = User::factory()->create();
     $userB = User::factory()->create();
