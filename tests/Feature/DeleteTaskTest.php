@@ -27,6 +27,6 @@ it('nem tudja törölni más felhasználó feladatát', function () {
         ->deleteJson("/api/tasks/{$taskOfUserB->id}")
         ->assertStatus(403);
 
-    // Ellenőrizzük, hogy az adat még mindig megvan
+    // Ellenőrizzük, hogy az adat megvan-e még
     $this->assertDatabaseHas('tasks', ['id' => $taskOfUserB->id]);
 });
